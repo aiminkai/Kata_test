@@ -23,20 +23,20 @@ public class Kata {
             "LXXI", "LXXII", "LXXIII", "LXXIV", "LXXV", "LXXVI", "LXXVII", "LXXVIII", "LXXIX", "LXXX",
             "LXXXI", "LXXXII", "LXXXIII", "LXXXIV", "LXXXV", "LXXXVI", "LXXXVII", "LXXXVIII", "LXXXIX", "XC",
             "XCI", "XCII", "XCIII", "XCIV", "XCV", "XCVI", "XCVII", "XCVIII", "XCIX", "C"};
-        ArrayList<String> listArabic = new ArrayList<>(Arrays.asList(arrayArab));
+        ArrayList<String> listArabic = new ArrayList<>(Arrays.asList(arrayArab)); //перевод в arrayList, чтобы использовать методы arrayList 
         ArrayList<String> listRoman = new ArrayList<>(Arrays.asList(arrayRoman));
 
-        String result = input;
+        String result = input; //присваиваем параметор переменной
 
-        String[] s = input.split("[+-/*]");
-        String[] sTrim = new String[s.length];
+        String[] s = input.split("[+-/*]");  //разбиваем входную строку на две части, разделяясь по арифметическому знаку. Загоняем в масси результат
+        String[] sTrim = new String[s.length]; //проходим по новому массиву и обрезаем пробелы на элементах
         for (int i = 0; i < s.length; i++) {
             sTrim[i] = s[i].trim();
         }
-        if (sTrim.length == 2) {
-            if (listArabic.contains(sTrim[0]) && listArabic.contains(sTrim[1])) {
+        if (sTrim.length == 2) { //элементов должно быть два, иначе введено что-то не то, выбрасываем exeption в else 
+            if (listArabic.contains(sTrim[0]) && listArabic.contains(sTrim[1])) { //если оба элемента есть в массиве опроных значений (сначала арабских), можно работать с инжексами этих опорных значений
 
-                switch (findArithmeticSign(input)) {
+                switch (findArithmeticSign(input)) { //используем метод findArithmeticSign для опеределения арифм знака
                     case '+':
                         result = Integer.toString(((listArabic.indexOf(sTrim[0]) + 1) + (listArabic.indexOf(sTrim[1]) + 1)));
                         break;
@@ -51,7 +51,7 @@ public class Kata {
                         break;
                 }
 
-            } else if (listRoman.contains(sTrim[0]) && listRoman.contains(sTrim[1])) {
+            } else if (listRoman.contains(sTrim[0]) && listRoman.contains(sTrim[1])) { //если не в опроных арабских, то проверяем в опорных римских, если и туту нету, то в след. else выброси exeption
                 switch (findArithmeticSign(input)) {
                     case '+':
                         result = arrayRomanResult[((listRoman.indexOf(sTrim[0]) + 1) + (listRoman.indexOf(sTrim[1]) + 1)) - 1];
@@ -59,7 +59,7 @@ public class Kata {
                     case '-':
 
                         if ((((listRoman.indexOf(sTrim[0]) + 1) - (listRoman.indexOf(sTrim[1]) + 1)) - 1) <1) {
-                            try {
+                            try {                                                   //провернка на отрицательное римское число
                             throw new InputMismatchException();
                             }
                             catch (InputMismatchException e){
@@ -91,7 +91,7 @@ public class Kata {
 
     }
 
-    public static char findArithmeticSign(String input) {
+    public static char findArithmeticSign(String input) { //метод для нахождения арифм знака
         char arithmeticSign = '1';
 
         if (input.contains("+")) {
