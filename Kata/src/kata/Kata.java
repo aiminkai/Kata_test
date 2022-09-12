@@ -7,8 +7,11 @@ import java.util.InputMismatchException;
 
 public class Kata {
 
+    
+    // метод для калькулятора
     public static String calc(String input) throws InputMismatchException {
-        String[] arrayArab = {"1", "2", "3", "4", "5", "6", "7", "8", "9"};
+        //будем использовать массивы стринговых чисел, арифиметические операции будут проходить с индексами элементов массива, которые идентичны смыслу стрингового элемента 
+        String[] arrayArab = {"1", "2", "3", "4", "5", "6", "7", "8", "9"}; 
         String[] arrayRoman = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X"};
         String[] arrayRomanResult = {"I", "II", "III", "IV", "V", "VI", "VII", "VIII", "IX", "X",
             "XI", "XII", "XIII", "XIV", "XV", "XVI", "XVII", "XVIII", "XIX", "XX",
